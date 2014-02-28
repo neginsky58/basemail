@@ -1,0 +1,13 @@
+<h1>
+  Send Email
+</h1>
+
+<%= form_for(:home) do |f| %>
+  <div class="row">
+    <%= f.label :to, 'To: ' %>
+    <%= f.text :to, placeholder: 'example@test.com' %>    
+    <%= f.label :body %>
+    <%= f.text_area :body, :rows=>7 %>
+    
+  </div>
+<% end %>
