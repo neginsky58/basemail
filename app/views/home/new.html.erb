@@ -17,6 +17,11 @@
       <%= f.label :body %>
       <%= f.text_area :body, :rows=>7 %>
     </div>
+    <div class="form-group">
+      <%= f.label :file %>
+      <%= f.file_field :file %>
+    </div>
+    <hr/>
     <div class="form-actions">
       <%= f.submit 'Send' %>
       <%= f.submit 'Save as draft' %>
