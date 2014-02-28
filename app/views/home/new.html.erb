@@ -2,12 +2,19 @@
   Send Email
 </h1>
 
-<%= form_for(:home) do |f| %>
+<%= form_for(:draft, url: create_home_url, method: 'post') do |f| %>
   <div class="row">
-    <%= f.label :to, 'To: ' %>
-    <%= f.text :to, placeholder: 'example@test.com' %>    
-    <%= f.label :body %>
-    <%= f.text_area :body, :rows=>7 %>
-    
+    <div class="form-group">
+      <%= f.label :to, 'To: ' %>
+      <%= f.text_field :to, placeholder: 'example@test.com' %>    
+    </div>
+    <div class="form-group">
+      <%= f.label :body %>
+      <%= f.text_area :body, :rows=>7 %>
+    </div>
+    <div class="form-actions">
+      <%= f.submit 'Send' %>
+      <%= f.submit 'Save as draft' %>
+    </div>
   </div>
 <% end %>
