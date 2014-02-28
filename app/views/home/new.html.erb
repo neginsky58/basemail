@@ -1,8 +1,13 @@
 <h1>
   Send Email
 </h1>
+<pre>
+<% flash.each do |key, value| %>
+  <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+<% end %>
+</pre>
 
-<%= form_for(:draft, url: create_home_url, method: 'post') do |f| %>
+<%= form_for(@draft, url: create_home_index_url, :method=>'post') do |f| %>
   <div class="row">
     <div class="form-group">
       <%= f.label :to, 'To: ' %>

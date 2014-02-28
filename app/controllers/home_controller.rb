@@ -6,33 +6,36 @@ class HomeController < ApplicationController
 
   def create
     respond_to do |format|
-      # if params[:commit] == 'Send'
-      #   if is_a_valid_email(params[:to])
-      #     ActionMailer::Base.mail(:from => "yevgeny@example.com", :to => params[:to], :subject => params[:subject], :body => params[:body]).deliver      
-      #     flash[:success] = t('email.success_sent')        
-      #     format.html { redirect_to root_url }
-      #     format.json
-      #   else
-      #     flash.now[:alert] = t('email.invalidate_recipient_email')        
-      #     format.html { render :new }
-      #     format.json
-      #   end
-      # elsif params[:commit] == 'Save as draft'
-      #   @draft = Draft.new(draft_params)
-      #   if @draft.save
-      #     flash[:success] = t('email.success_saved_as_draft')
-      #     format.html { redirect_to root_url }
-      #     format.json          
-      #   else
-      #     flash.now[:alert] = t('email.fail_sent')
-      #     format.html { render :new }
-      #     format.json
-      #   end
+      if params[:commit] == 'Send'
+        if is_a_valid_email(params[:draft][:to])
+          ActionMailer::Base.mail(:from => "yevgeny@example.com", :to => params[:draft][:to], :subject => params[:draft][:subject], :body => params[:draft][:body]).deliver      
+          flash[:success] = t('email.success_sent')        
           format.html { redirect_to root_url }
-          format.json  
-
-      
-      # end
+          format.json
+        else
+          flash.now[:alert] = t('email.invalidate_recipient_email')        
+          @draft = Draft.new
+          format.html { render :new}
+          format.json
+        end
+      elsif params[:commit] == 'Save as draft'
+        @draft = Draft.new(draft_params)
+        if @draft.save
+          flash[:success] = t('email.success_saved_as_draft')
+          format.html { redirect_to root_url }
+          format.json          
+        else          
+          flash.now[:alert] = t('email.fail_sent')
+          @draft = Draft.new
+          format.html { render :new }
+          format.json
+        end
+      else        
+        @draft = Draft.new
+        flash.now[:alert] = t('email.invalid_action')
+        format.html { render :new }
+        format.json
+      end
     end
   end
 

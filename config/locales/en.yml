@@ -26,3 +26,4 @@ en:
     success_saved_as_draft: 'Successful saved as draft'
     fail_sent: 'Failed. Please contact support.'
     invalidate_recipient_email: 'Invalidate recipient email address'
+    invalid_action: 'Invalid Action'
